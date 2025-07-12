@@ -1,0 +1,311 @@
+/* --- VARIABLES Y ESTILOS GLOBALES --- */
+:root {
+    --color-primario: #0A2240; /* Azul marino oscuro */
+    --color-secundario: #D4AF37; /* Dorado / Ocre */
+    --color-fondo: #110c6f; /* Gris muy claro */
+    --color-texto: #b69118;
+    --font-titulos: Arial, sans-serif;
+    --font-cuerpo: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-cuerpo);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;;
+    margin: 0 auto;
+    padding: 0px;
+}
+
+h3 {
+    font-family: var(--font-titulos);
+    color: var(--color-primario);
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* --- ENCABEZADO (HERO SECTION) --- */
+.hero {
+    background-color: var(--color-primario);
+    /* CAMBIA 'foto-principal.jpg' por tu imagen de fondo para el encabezado */
+    /* background-image: linear-gradient(rgba(10, 34, 64, 0.7), rgba(10, 34, 64, 0.7)), url('images/33.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: white;*/
+    text-align: center;
+    padding: 10px
+}
+
+.hero-shield {
+    width: 150px;
+    border-radius: 50%; /* Esto la hace circular */
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-family: var(--font-titulos);
+    font-size: 4rem;
+    color: white;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.hero-subtitle {
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--color-secundario);
+    margin-top: 10px;
+}
+
+/* --- SECCIONES DE CONTENIDO --- */
+.section {
+    padding: 50px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+P {margin:20px;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+    text-align: inherit;
+    max-width:fit-content;
+    font-size: 1.1rem;
+    font-weight:  600;
+}
+
+h2 {text-align: center;}
+
+/* --- GALERÍA DE FOTOS --- */
+.photo-grid {
+    display: grid;
+    /* Crea columnas automáticas que se adaptan al tamaño */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.photo-item.wide {
+    grid-column: span 2; /* ¡La magia! Hace que este item ocupe 2 columnas */
+}
+
+/* --- LISTA DE INTEGRANTES --- */
+.name-list-container {
+    /*background-color: var(--color-primario);-->*/
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3)), url('images/33.jpeg');
+    background-size: cover;
+    background-position: center;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(115, 77, 77, 0.05);
+}
+
+.name-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: left;
+    column-count: 4;
+    column-gap: 28px;
+}
+
+.name-list li {
+    padding-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #02000e;
+    break-inside: avoid;
+}
+
+
+.name-list1 {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: left;
+    column-count: 4;
+    column-gap: 28px;
+}
+.name-list1 li {
+    padding-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #02000e;
+    break-inside: avoid;
+}
+/* --- FOOTER --- */
+footer {
+    background-color: var(--color-primario);
+    color: #a7aebb;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+/* --- DISEÑO RESPONSIVO --- */
+@media (max-width: 992px) {
+    .name-list { column-count: 3; }
+    .name-list1 { column-count: 3; }
+    .hero-title { font-size: 3rem; }
+}
+
+@media (max-width: 768px) {
+    .name-list { column-count: 2; }
+    .name-list1{ column-count: 2; }
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+}
+
+@media (max-width: 480px) {
+    .name-list { column-count: 1; }
+    .name-list1 { column-count: 1; }
+}
+/* --- ESTILOS PARA EL MODAL LIGHTBOX --- */
+
+.lightbox {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Se queda fijo en la pantalla, incluso con scroll */
+    z-index: 1000; /* Se asegura de que esté por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo negro semi-transparente */
+    overflow: auto; /* Permite scroll si la imagen es muy alta */
+    
+    /* Efecto de aparición suave */
+    animation: fadeIn 0.4s;
+}
+
+.lightbox-content {
+    display: block;
+    margin: auto;
+    max-width: 90%; /* La imagen nunca ocupará más del 90% del ancho */
+    max-height: 80vh; /* Ni más del 80% del alto de la ventana */
+    margin-top: 5vh; /* Margen superior para no pegarla al techo */
+    
+    /* Animación de zoom al abrir */
+    animation: zoomIn 0.4s;
+}
+
+#lightbox-caption {
+    margin: 15px auto;
+    display: block;
+    width: 80%;
+    text-align: center;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lightbox-close:hover {
+    color: var(--color-secundario); /* Color dorado al pasar el ratón */
+}
+
+
+/* --- ANIMACIONES --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+/* --- RESPONSIVIDAD DEL LIGHTBOX Y GALERÍA --- */
+@media (max-width: 768px) {
+    /* En móviles, la foto ancha ocupa todo el ancho (1 columna) */
+    .photo-item.wide {
+        grid-column: span 1; 
+    }
+
+    .lightbox-content {
+        max-width: 95%; /* Un poco más de ancho en móviles */
+    }
+}
+/* --- ESTILOS PARA FOTO A ANCHO COMPLETO --- */
+
+.full-width-photo {
+    width: 100%; /* Ocupa el 100% del ancho de la ventana del navegador */
+    margin: 50px 0; /* Añade espacio vertical arriba y abajo */
+    line-height: 0; /* Elimina cualquier espacio extra debajo de la imagen */
+}
+
+.full-width-photo img {
+    width: 100%; /* La imagen llena su contenedor */
+    height: auto; /* La altura se ajusta para no deformar la imagen */
+    /* Opcional: si la imagen es muy alta, puedes limitarla */
+    /* max-height: 60vh; */
+    /* object-fit: cover; */
+}
+
+/* --- ESTILOS PARA LAS SECCIONES DE HOMENAJE Y VIDEOS --- */
+
+.tribute-section {
+    padding: 50px 0;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.tribute-title {
+    font-family: var(--font-titulos);
+    color: var(--color-secundario);
+    font-size: 2rem; /* Un poco más pequeño que los títulos principales */
+    margin-bottom: 15px;
+}
+
+.tribute-description {
+    max-width: 700px;
+    margin: 0 auto 30px auto; /* Centrado y con espacio inferior */
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* --- CONTENEDOR DE VIDEO RESPONSIVO (Método Moderno) --- */
+.video-container {
+    max-width: 900px; /* Limita el ancho máximo del video en pantallas grandes */
+    margin: 0 auto; /* Centra el contenedor */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden; /* Asegura que el iframe respete los bordes redondeados */
+    
+    /* ¡La magia! Mantiene la proporción 16:9 */
+    aspect-ratio: 16 / 9; 
+}
+.video-container iframe {
+    /* El iframe llena por completo el contenedor */
+    width: 100%;
+    height: 100%;
+    border: 0; /* Elimina cualquier borde que el navegador pueda añadir */
+}
