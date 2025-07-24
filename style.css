@@ -303,7 +303,7 @@ footer {
     /* ¡La magia! Mantiene la proporción 16:9 */
     aspect-ratio: 16 / 9; 
 }
-.video-container iframe {
+.video-container video {
     /* El iframe llena por completo el contenedor */
     width: 100%;
     height: 100%;
