@@ -287,7 +287,7 @@ footer {
 
 .tribute-description {
     max-width: 700px;
-    margin: 0 auto 30px auto; /* Centrado y con espacio inferior */
+    margin: 0 auto 30px auto;/* Centrado y con espacio inferior */
     font-size: 1.1rem;
     line-height: 1.7;
 }
