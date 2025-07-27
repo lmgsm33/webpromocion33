@@ -17,9 +17,17 @@ body {
 }
 
 .container {
-    max-width: 1100px;;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0px;
+    padding: 0;
+}
+
+h2 {
+    font-family: var(--font-titulos);
+    color: var(--color-secundario);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 h3 {
@@ -33,18 +41,13 @@ h3 {
 /* --- ENCABEZADO (HERO SECTION) --- */
 .hero {
     background-color: var(--color-primario);
-    /* CAMBIA 'foto-principal.jpg' por tu imagen de fondo para el encabezado */
-    /* background-image: linear-gradient(rgba(10, 34, 64, 0.7), rgba(10, 34, 64, 0.7)), url('images/33.jpeg');
-    background-size: cover;
-    background-position: center;
-    color: white;*/
     text-align: center;
-    padding: 10px
+    padding: 10px;
 }
 
 .hero-shield {
     width: 150px;
-    border-radius: 50%; /* Esto la hace circular */
+    border-radius: 50%;
     margin-bottom: 20px;
 }
 
@@ -69,27 +72,91 @@ h3 {
     border-bottom: 1px solid #ddd;
 }
 
-P {margin:20px;
+p {
+    margin: 20px;
     background-color: var(--color-fondo);
     color: var(--color-texto);
     line-height: 1.6;
     text-align: inherit;
-    max-width:fit-content;
+    max-width: fit-content;
     font-size: 1.1rem;
-    font-weight:  600;
+    font-weight: 600;
 }
 
-h2 {text-align: center;}
+/* --- VISTA DE REVISTA HORIZONTAL --- */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
 
-/* --- GALERÍA DE FOTOS --- */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2em;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    user-select: none;
+    z-index: 10;
+    line-height: 1;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
 .photo-grid {
-    display: grid;
-    /* Crea columnas automáticas que se adaptan al tamaño */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    height: 100%;
+}
+
+.photo-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    box-shadow: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-item img:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- GALERÍA DE FOTOS CUADRICULA ---*/
+.photo-grid1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+@media (min-width: 768px) {
+    .photo-grid1 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.photo-item1 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -98,18 +165,18 @@ h2 {text-align: center;}
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.photo-item img:hover {
-    transform: scale(1.05);
+.photo-item1 img:hover {
+    transform: none;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.photo-item.wide {
-    grid-column: span 2; /* ¡La magia! Hace que este item ocupe 2 columnas */
+.photo-item1.wide {
+    grid-column: span 2;
 }
 
 /* --- LISTA DE INTEGRANTES --- */
 .name-list-container {
-    /*background-color: var(--color-primario);-->*/
+    /* CORREGIDO: Sintaxis de background-image */
     background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3)), url('images/33.jpeg');
     background-size: cover;
     background-position: center;
@@ -135,7 +202,6 @@ h2 {text-align: center;}
     break-inside: avoid;
 }
 
-
 .name-list1 {
     padding: 0;
     margin: 0;
@@ -144,6 +210,7 @@ h2 {text-align: center;}
     column-count: 4;
     column-gap: 28px;
 }
+
 .name-list1 li {
     padding-bottom: 10px;
     font-size: 1rem;
@@ -151,6 +218,7 @@ h2 {text-align: center;}
     color: #02000e;
     break-inside: avoid;
 }
+
 /* --- FOOTER --- */
 footer {
     background-color: var(--color-primario);
@@ -162,75 +230,49 @@ footer {
 
 /* --- DISEÑO RESPONSIVO --- */
 @media (max-width: 992px) {
-    .name-list { column-count: 3; }
-    .name-list1 { column-count: 3; }
+    .name-list, .name-list1 { column-count: 3; }
     .hero-title { font-size: 3rem; }
 }
 
 @media (max-width: 768px) {
-    .name-list { column-count: 2; }
-    .name-list1{ column-count: 2; }
+    .name-list, .name-list1 { column-count: 2; }
     .hero-title { font-size: 2.5rem; }
     .hero-subtitle { font-size: 1.1rem; }
 }
 
 @media (max-width: 480px) {
-    .name-list { column-count: 1; }
-    .name-list1 { column-count: 1; }
+    .name-list, .name-list1 { column-count: 1; }
 }
-/* --- ESTILOS PARA EL MODAL LIGHTBOX --- */
-
+/* --- ESTILOS PARA EL MODAL LIGHTBOX (UNIFICADO Y MEJORADO) --- */
 .lightbox {
-    display: none; /* Oculto por defecto */
-    position: fixed; /* Se queda fijo en la pantalla, incluso con scroll */
-    z-index: 1000; /* Se asegura de que esté por encima de todo */
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fondo negro semi-transparente */
-    overflow: auto; /* Permite scroll si la imagen es muy alta */
-    
-    /* Efecto de aparición suave */
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Permite el scroll si la imagen es más grande que la pantalla */
     animation: fadeIn 0.4s;
 }
 
 .lightbox-content {
     display: block;
-    margin: auto;
-    max-width: 90%; /* La imagen nunca ocupará más del 90% del ancho */
-    max-height: 80vh; /* Ni más del 80% del alto de la ventana */
-    margin-top: 5vh; /* Margen superior para no pegarla al techo */
-    
-    /* Animación de zoom al abrir */
-    animation: zoomIn 0.4s;
+    max-width: 100%; /* La imagen siempre ocupará el 100% del ancho disponible */
+    max-height: 100vh; /* La imagen siempre ocupará el 100% del alto de la ventana */
+    transition: none; /* Quitamos las transiciones de zoom */
+    user-select: none;
+    transform-origin: 50% 50%;
+    cursor: grab; /* El cursor para arrastrar está siempre activo */
 }
 
-#lightbox-caption {
-    margin: 15px auto;
-    display: block;
-    width: 80%;
-    text-align: center;
-    color: #ccc;
-    font-size: 1rem;
+.lightbox-content:active {
+    cursor: grabbing; /* Muestra un cursor diferente cuando el usuario está arrastrando */
 }
-
-.lightbox-close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.lightbox-close:hover {
-    color: var(--color-secundario); /* Color dorado al pasar el ratón */
-}
-
-
 /* --- ANIMACIONES --- */
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -242,36 +284,29 @@ footer {
     to { transform: scale(1); opacity: 1; }
 }
 
-
 /* --- RESPONSIVIDAD DEL LIGHTBOX Y GALERÍA --- */
 @media (max-width: 768px) {
-    /* En móviles, la foto ancha ocupa todo el ancho (1 columna) */
     .photo-item.wide {
-        grid-column: span 1; 
+        grid-column: span 1;
     }
-
     .lightbox-content {
-        max-width: 95%; /* Un poco más de ancho en móviles */
+        max-width: 95%;
     }
 }
-/* --- ESTILOS PARA FOTO A ANCHO COMPLETO --- */
 
+/* --- ESTILOS PARA FOTO A ANCHO COMPLETO --- */
 .full-width-photo {
-    width: 100%; /* Ocupa el 100% del ancho de la ventana del navegador */
-    margin: 50px 0; /* Añade espacio vertical arriba y abajo */
-    line-height: 0; /* Elimina cualquier espacio extra debajo de la imagen */
+    width: 100%;
+    margin: 50px 0;
+    line-height: 0;
 }
 
 .full-width-photo img {
-    width: 100%; /* La imagen llena su contenedor */
-    height: auto; /* La altura se ajusta para no deformar la imagen */
-    /* Opcional: si la imagen es muy alta, puedes limitarla */
-    /* max-height: 60vh; */
-    /* object-fit: cover; */
+    width: 100%;
+    height: auto;
 }
 
 /* --- ESTILOS PARA LAS SECCIONES DE HOMENAJE Y VIDEOS --- */
-
 .tribute-section {
     padding: 50px 0;
     border-bottom: 1px solid #ddd;
@@ -281,31 +316,29 @@ footer {
 .tribute-title {
     font-family: var(--font-titulos);
     color: var(--color-secundario);
-    font-size: 2rem; /* Un poco más pequeño que los títulos principales */
+    font-size: 2rem;
     margin-bottom: 15px;
 }
 
 .tribute-description {
     max-width: 700px;
-    margin: 0 auto 30px auto;/* Centrado y con espacio inferior */
+    margin: 0 auto 30px auto;
     font-size: 1.1rem;
     line-height: 1.7;
 }
 
-/* --- CONTENEDOR DE VIDEO RESPONSIVO (Método Moderno) --- */
+/* --- CONTENEDOR DE VIDEO RESPONSIVO --- */
 .video-container {
-    max-width: 900px; /* Limita el ancho máximo del video en pantallas grandes */
-    margin: 0 auto; /* Centra el contenedor */
+    max-width: 900px;
+    margin: 0 auto;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
-    overflow: hidden; /* Asegura que el iframe respete los bordes redondeados */
-    
-    /* ¡La magia! Mantiene la proporción 16:9 */
-    aspect-ratio: 16 / 9; 
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
 }
+
 .video-container video {
-    /* El iframe llena por completo el contenedor */
     width: 100%;
     height: 100%;
-    border: 0; /* Elimina cualquier borde que el navegador pueda añadir */
+    border: 0;
 }
