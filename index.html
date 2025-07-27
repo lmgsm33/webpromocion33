@@ -534,7 +534,7 @@
         }
     }
 
-    // --- SCRIPT PARA EL MODAL DE PANTALLA COMPLETA CON ARRASTRE ---
+    // --- SCRIPT PARA EL MODAL DE PANTALLA COMPLETA CON ARRASTRE Y ESCALADO INTELIGENTE ---
     document.addEventListener('DOMContentLoaded', function() {
         const galleryImages = document.querySelectorAll('.gallery-image');
         const lightbox = document.getElementById('lightbox');
@@ -550,13 +550,37 @@
             lightboxImage.src = event.target.src;
             lightboxCaption.innerHTML = event.target.alt;
             
-            // Reajustamos la posición de scroll
+            // Reajustamos la posición de scroll a 0
             lightbox.scrollTop = 0;
             lightbox.scrollLeft = 0;
+            
+            // Reiniciamos cualquier transformación previa
+            lightboxImage.style.transform = 'scale(1)';
+
+            // --- LÓGICA DE ESCALADO INTELIGENTE ---
+            lightboxImage.onload = () => {
+                const imageWidth = lightboxImage.naturalWidth;
+                const imageHeight = lightboxImage.naturalHeight;
+                const modalWidth = lightbox.offsetWidth;
+                const modalHeight = lightbox.offsetHeight;
+
+                // Calculamos el factor de escala necesario
+                const scaleX = modalWidth / imageWidth;
+                const scaleY = modalHeight / imageHeight;
+                const scaleFactor = Math.min(scaleX, scaleY);
+
+                if (scaleFactor > 1) {
+                    // Si la imagen es más pequeña que el modal, la escalamos para que lo llene
+                    lightboxImage.style.transform = `scale(${scaleFactor})`;
+                } else {
+                    // Si la imagen es más grande, la dejamos en su tamaño original
+                    lightboxImage.style.transform = 'scale(1)';
+                }
+            };
         }
         
         function startDrag(e) {
-            e.preventDefault(); // Previene el comportamiento por defecto del navegador
+            e.preventDefault();
             isDragging = true;
             lightboxImage.style.cursor = 'grabbing';
             startX = e.clientX;
@@ -585,8 +609,7 @@
         });
 
         lightboxImage.addEventListener('mousedown', startDrag);
-        // CORRECCIÓN: Se agregó 'lightbox' antes de .addEventListener
-        lightbox.addEventListener('mousemove', drag); 
+        lightbox.addEventListener('mousemove', drag);
         lightbox.addEventListener('mouseup', stopDrag);
         lightbox.addEventListener('mouseleave', stopDrag);
 

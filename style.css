@@ -243,8 +243,9 @@ footer {
 @media (max-width: 480px) {
     .name-list, .name-list1 { column-count: 1; }
 }
-/* --- ESTILOS PARA EL MODAL LIGHTBOX (UNIFICADO Y MEJORADO) --- */
+/* --- ESTILOS PARA EL MODAL LIGHTBOX --- */
 .lightbox {
+    /* Por defecto, está oculto y no se muestra con Flexbox */
     display: none;
     position: fixed;
     z-index: 1000;
@@ -253,25 +254,44 @@ footer {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto; /* Permite el scroll si la imagen es más grande que la pantalla */
+    overflow: auto; /* Permitimos el scroll en ambas direcciones */
     animation: fadeIn 0.4s;
 }
 
 .lightbox-content {
     display: block;
-    max-width: 100%; /* La imagen siempre ocupará el 100% del ancho disponible */
-    max-height: 100vh; /* La imagen siempre ocupará el 100% del alto de la ventana */
-    transition: none; /* Quitamos las transiciones de zoom */
+    margin: auto;
+    transition: transform 0.3s ease; /* Necesitamos la transición para el escalado */
     user-select: none;
-    transform-origin: 50% 50%;
-    cursor: grab; /* El cursor para arrastrar está siempre activo */
+    cursor: grab;
 }
 
 .lightbox-content:active {
-    cursor: grabbing; /* Muestra un cursor diferente cuando el usuario está arrastrando */
+    cursor: grabbing;
+}
+
+/* Estilos de la 'X' de cierre mejorados */
+.lightbox-close {
+    position: fixed; /* Mantiene la X anclada a la pantalla */
+    top: 20px;
+    right: 30px;
+    color: #fff; /* Color blanco para mayor contraste */
+    font-size: 50px; /* Tamaño más grande para que sea fácil de ver */
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.3s;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para que siempre se vea */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    line-height: 50px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1001; /* Asegura que la X esté por encima de la imagen */
+}
+
+.lightbox-close:hover {
+    color: var(--color-secundario); 
 }
 /* --- ANIMACIONES --- */
 @keyframes fadeIn {
