@@ -46,9 +46,9 @@ h3 {
 }
 
 .hero-shield {
-    width: 150px;
+    width: 250px;
     border-radius: 50%;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .hero-title {
